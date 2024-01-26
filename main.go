@@ -3,7 +3,9 @@
 package main
 
 import (
+	"db/database.go"
 	"log"
+
 	// "net/http"
 	"github.com/gin-gonic/gin"
 )
@@ -11,16 +13,21 @@ import (
 func main() {
 	router := gin.Default()
 
+	database, err := db.NewDatabase("user=username dbname=your_database_name password=your_password host=localhost sslmode=disable")
+	if err != nil {
+		log.Fatal("Failed to connect to the database: ", err)
+	}
 	// Routes
-	router.POST("/users", createUser)
-	router.POST("/otp", generateOTP)
-	router.POST("/verify", verifyOTP)
+	router.POST("/api/users", createUser)
+	router.POST("/api/users/generateotp", generateOTP)
+	router.POST("/api/users/verifyotp", verifyOTP)
 
 	// Start the server
 	err := router.Run(":8080")
 	if err != nil {
 		log.Fatal("Failed to start the server: ", err)
 	}
+
 }
 
 func createUser(c *gin.Context) {
