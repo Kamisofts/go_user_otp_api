@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS create_user;
+DROP TABLE IF EXISTS otp;

@@ -1,0 +1,7 @@
+# sqlc.yaml
+
+version: 1
+packages:
+  - name: db
+    path: db
+    queries: queries/*.sql
